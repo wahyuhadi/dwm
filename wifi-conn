@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "[+] scanning wifi "
+nmcli d wifi list
+
+
+# Ask the user for login details
+read -p 'Wifiname: ' wifi
+read -p 'Password: ' passw
+
+
+## Connect
+echo "[+] Connecting wifi .."
+nmcli device wifi connect $wifi password $passw
+echo "[+] Done !!!"
