@@ -35,6 +35,6 @@ do
     dispstr="$dispstr$(dwm_networkmanager)"
     dispstr="$dispstr$(dwm_date)"
     xsetroot -name "$dispstr"
-    sleep 1
+    sleep 3
 
 done
