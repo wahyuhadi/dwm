@@ -5,9 +5,9 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "JetBrainsMono-Bold:pixelsize=15:antialias=true:autohint=true";
-static char *font2[] = { "JetBrainsMono-Bold:pixelsize=15:antialias=true:autohint=true" };
-static int borderpx = 3;
+static char *font = "JetBrainsMono:pixelsize=19:antialias=true:autohint=true";
+static char *font2[] = { "JetBrainsMono:pixelsize=19:antialias=true:autohint=true" };
+static int borderpx = 2;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -17,7 +17,7 @@ static int borderpx = 3;
  * 4: value of shell in /etc/passwd
  * 5: value of shell in config.h
  */
-static char *shell = "/bin/zsh";
+static char *shell = "/usr/bin/zsh";
 char *utmp = NULL;
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
@@ -108,39 +108,34 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity */
-float alpha = 1;
+float alpha = 20;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-	/* 8 normal colors */
-	"black",
-	"red3",
-	"green3",
-	"yellow3",
-	"blue",
-	"magenta3",
-	"cyan3",
-	"gray90",
-
-	/* 8 bright colors */
-	"gray50",
-	"red",
-	"green",
-	"yellow",
-	"blue",
-	"magenta",
-	"cyan",
-	"white",
-
+	"#282828", /* hard contrast: #1d2021 / soft contrast: #32302f */
+	"#cc241d",
+	"#98971a",
+	"#d79921",
+	"#458588",
+	"#b16286",
+	"#689d6a",
+	"#a89984",
+	"#928374",
+	"#fb4934",
+	"#b8bb26",
+	"#fabd2f",
+	"#83a598",
+	"#d3869b",
+	"#8ec07c",
+	"#ebdbb2",
+	"#383d39", /*Yellow*/
 	[255] = 0,
-
 	/* more colors can be added after 255 to use with DefaultXX */
-	"magenta",
-	"blue",
-	"#ffffff", /* 258 -> bg */
-	"#000000", /* 259 -> fg */
+	"#add8e6", /* 256 -> cursor */
+	"#555555", /* 257 -> rev cursor*/
+	"#000000", /* 258 -> bg */
+	"#ffffff", /* 259 -> fg */
 };
-
 
 
 /*
@@ -159,14 +154,14 @@ unsigned int defaultrcs = 257;
  * 6: Bar ("|")
  * 7: Snowman ("☃")
  */
-static unsigned int cursorshape = 6;
+static unsigned int cursorshape = 4;
 
 /*
  * Default columns and rows numbers
  */
 
 static unsigned int cols = 80;
-static unsigned int rows = 30;
+static unsigned int rows = 24;
 
 /*
  * Default colour and shape of the mouse cursor
@@ -240,7 +235,7 @@ MouseKey mkeys[] = {
 	{ Button5,              TERMMOD,        zoom,           {.f =  -1} },
 };
 
-static char *openurlcmd[] = { "/bin/sh", "-c", "st-urlhandler", "externalpipe", NULL };
+static char *openurlcmd[] = { "/usr/bin/zsh", "-c", "st-urlhandler", "externalpipe", NULL };
 
 static char *copyurlcmd[] = { "/bin/sh", "-c",
     "tmp=$(sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https|gopher|gemini|ftp|ftps|git)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@$&%?$#=_-~]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' | uniq | sed 's/^www./http:\\/\\/www\\./g' ); IFS=; [ ! -z $tmp ] && echo $tmp | dmenu -i -p 'Copy which url?' -l 10 | tr -d '\n' | xclip -selection clipboard",

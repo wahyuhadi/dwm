@@ -22,18 +22,24 @@ export SEP1="["
 export SEP2="]"
 
 # Import the modules
+. "$DIR/bar-functions/dwm_resources.sh"
 . "$DIR/bar-functions/dwm_battery.sh"
 . "$DIR/bar-functions/dwm_networkmanager.sh"
 . "$DIR/bar-functions/dwm_date.sh"
+. "$DIR/bar-functions/dwm_invst.sh"
+. "$DIR/bar-functions/dwm_soc.sh"
 # Update dwm status bar every second
 while true
 do
 
     # Append results of each func one by one to a string
     dispstr=""
+    dispstr="$dispstr$(dwm_resources)"
     dispstr="$dispstr$(dwm_battery)"
     dispstr="$dispstr$(dwm_networkmanager)"
     dispstr="$dispstr$(dwm_date)"
+    dispstr="$dispstr$(dwm_invst)"
+    dispstr="$dispstr$(dwm_soc)"
     xsetroot -name "$dispstr"
     sleep 3
 
